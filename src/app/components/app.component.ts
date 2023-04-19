@@ -10,17 +10,10 @@ export class AppComponent implements AfterViewInit {
     // ViewChild properties
 
     @ViewChild('divRef', {static: false})
-    private set _myViewChild(value: ElementRef<HTMLDivElement>) {
-        this.myViewChild = value;
-
-        if (value != null) {
-            this.notifyChangeOfMyViewChild();
-        }
-    }
+    public myViewChild?: ElementRef<HTMLDivElement>;
 
     // Public properties
 
-    public myViewChild?: ElementRef<HTMLDivElement>;
     public shouldDisplayDiv = false;
 
     // Lifecycle
@@ -35,9 +28,9 @@ export class AppComponent implements AfterViewInit {
         }, 2000);
     }
 
-    // Inner work
+    // Interface
 
-    private notifyChangeOfMyViewChild() {
+    public notifyChangeOfMyViewChild() {
         console.log('# notifyChangeOfMyViewChild()')
         console.log('- myViewChild = ', this.myViewChild);
     }

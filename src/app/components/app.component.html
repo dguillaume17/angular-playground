@@ -1,2 +1,7 @@
-<div #divRef *ngIf="shouldDisplayDiv"></div>
+<div
+    #divRef
+    *ngIf="shouldDisplayDiv"
+    app-render-notifier
+    (rendered)="notifyChangeOfMyViewChild()">
+</div>
 {{shouldDisplayDiv}}
