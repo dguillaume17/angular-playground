@@ -1,44 +1,45 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements AfterViewInit {
 
     // ViewChild properties
 
-    @ViewChild('divRef')
-    public myViewChild1?: ElementRef<HTMLDivElement>;
-
-    @ViewChild('divRef', {static: true})
-    public myViewChild2?: ElementRef<HTMLDivElement>;
-
     @ViewChild('divRef', {static: false})
-    public myViewChild3?: ElementRef<HTMLDivElement>;
+    private set _myViewChild(value: ElementRef<HTMLDivElement>) {
+        this.myViewChild = value;
+
+        if (value != null) {
+            this.notifyChangeOfMyViewChild();
+        }
+    }
+
+    // Public properties
+
+    public myViewChild?: ElementRef<HTMLDivElement>;
+    public shouldDisplayDiv = false;
 
     // Lifecycle
 
-    constructor() {
-        this.debug('constructor');
-    }
-
-    ngOnInit() {
-        this.debug('ngOnInit');
-    }
-
     ngAfterViewInit() {
-        this.debug('ngAfterViewInit');
+        console.log('# ngAfterViewInit()');
+        console.log('- Waiting 2 seconds to display the div element')
+        setTimeout(() => {
+            console.log('- Displaying the div element')
+            console.log('- myViewChild = ', this.myViewChild);
+            this.shouldDisplayDiv = true;
+        }, 2000);
     }
 
     // Inner work
 
-    private debug(name: string) {
-        console.log(`#${name}`);
-        console.log('* myViewChild1 = ', this.myViewChild1);
-        console.log('* myViewChild2 = ', this.myViewChild2);
-        console.log('* myViewChild3 = ', this.myViewChild3);
+    private notifyChangeOfMyViewChild() {
+        console.log('# notifyChangeOfMyViewChild()')
+        console.log('- myViewChild = ', this.myViewChild);
     }
 
 }
