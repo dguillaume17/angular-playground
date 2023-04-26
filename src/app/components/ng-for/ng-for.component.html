@@ -1,0 +1,9 @@
+<button (click)="setupItems(1)">Click</button>
+<button (click)="setupItems(2)">Click</button>
+
+<ul>
+	<li *ngFor="let item of items; trackBy: trackByFn" #test>
+		coucou
+	</li>
+</ul>
+
