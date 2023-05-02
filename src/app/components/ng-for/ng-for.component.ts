@@ -14,12 +14,8 @@ export class NgForComponent implements AfterViewInit{
 
     // ViewChildren properties
 
-    // BEGIN: Component.ViewChildren(Selector=TemplateVariable)
-
     @ViewChildren('test') // MARK-1-
     public test?: QueryList<any>; // MARK-1-
-
-    // END: Component.ViewChildren(Selector=TemplateVariable)
 
     // Public properties
 
